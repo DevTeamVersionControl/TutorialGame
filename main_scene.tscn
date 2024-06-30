@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://be3i43qco6m63"]
+[gd_scene load_steps=18 format=3 uid="uid://cllubx6m63ejy"]
 
 [ext_resource type="PackedScene" uid="uid://dalkpem7nb8h8" path="res://tower_spot.tscn" id="1_710bw"]
+[ext_resource type="PackedScene" uid="uid://di1x7cpc2ow5c" path="res://player.tscn" id="2_2uye5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jye5g"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,13 +38,16 @@ size = Vector3(21.2838, 1.36483, 9.75378)
 size = Vector3(3, 0.5, 8.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i142f"]
-size = Vector3(2, 0.5, 8.5)
+size = Vector3(3, 0.5, 8.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0drms"]
+size = Vector3(3.1, 0.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2gve"]
-size = Vector3(3, 0.5, 8.5)
+size = Vector3(3, 0.5, 11)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cujhb"]
-size = Vector3(2, 0.5, 8.5)
+size = Vector3(3, 0.5, 11)
 
 [sub_resource type="Curve3D" id="Curve3D_iudv8"]
 _data = {
@@ -104,18 +108,26 @@ transform = Transform3D(0.908144, -0.011304, -0.418505, -0.0518266, 0.988911, -0
 mesh = SubResource("BoxMesh_iitr6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge1"]
-transform = Transform3D(0.898735, -0.110592, -0.424318, 0.0383641, 0.983794, -0.175154, 0.436812, 0.141138, 0.888412, 4.08197, 1.38626, -7.31991)
+transform = Transform3D(0.908144, -0.0113041, -0.418506, -0.0518266, 0.988911, -0.139173, 0.415438, 0.148079, 0.897488, 4.082, 1.35, -7.32)
 shape = SubResource("BoxShape3D_i142f")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Environment/Bridges/Bridge1"]
+transform = Transform3D(0.992757, -0.0448096, -0.111467, 0, 0.927836, -0.372988, 0.120137, 0.370286, 0.921116, 5.61292, 1.7788, -10.3328)
+shape = SubResource("BoxShape3D_0drms")
 
 [node name="Bridge2" type="StaticBody3D" parent="Environment/Bridges"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Bridges/Bridge2"]
-transform = Transform3D(1.02599, -0.0172377, -0.14415, 0.00571256, 1.04243, -0.122365, 0.118055, 0.0993662, 1.25869, 25.4013, 1.38626, -2.91003)
+transform = Transform3D(0.99343, -0.0164591, -0.113252, 0.00553127, 0.995353, -0.0961368, 0.114308, 0.0948787, 0.988904, 25.4013, 1.38626, -2.91003)
 mesh = SubResource("BoxMesh_h2gve")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge2"]
 transform = Transform3D(0.99343, -0.0164592, -0.113253, 0.00553128, 0.995353, -0.0961371, 0.114309, 0.094879, 0.988904, 25.4013, 1.38626, -2.91003)
 shape = SubResource("BoxShape3D_cujhb")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Environment/Bridges/Bridge2"]
+transform = Transform3D(0.992757, -0.0448096, -0.111467, 0, 0.927836, -0.372988, 0.120137, 0.370286, 0.921116, 25.9783, 1.77533, -7.48131)
+shape = SubResource("BoxShape3D_0drms")
 
 [node name="Towers" type="Node3D" parent="."]
 
@@ -197,5 +209,5 @@ transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.9999
 [node name="Path3D" type="Path3D" parent="Route"]
 curve = SubResource("Curve3D_iudv8")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.825803, 0.411162, -0.385999, 0, 0.684445, 0.729064, 0.563959, -0.602063, 0.565217, -2.00321, 18.0498, 23.6152)
+[node name="Player" parent="." instance=ExtResource("2_2uye5")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.410413, 0.536, 1.58252)
