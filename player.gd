@@ -1,17 +1,17 @@
 class_name Player
 extends CharacterBody3D
 
-@export var SPEED := 5.0
-@export var DECELERATION := 1
-@export var JUMP_VELOCITY := 4.5
-@export var SENSITIVITY := 0.003
-@export var MIN_X_ROTATION_DEGREES := -40
-@export var MAX_X_ROTATION_DEGREES := 60
-@export var MIN_Y_WORLD_POSITION := -10
+const SPEED = 5.0
+const DECELERATION = 1
+const JUMP_VELOCITY = 4.5
+const SENSITIVITY = 0.003
+const MIN_X_ROTATION_DEGREES = -40
+const MAX_X_ROTATION_DEGREES = 60
+const MIN_Y_WORLD_POSITION = -10
 
-@export var BOB_FREQUENCY := 2.0
-@export var BOB_AMPLITUDE := 0.08
-var t_bob := 0.0
+const BOB_FREQUENCY = 2.0
+const BOB_AMPLITUDE = 0.08
+var t_bob = 0.0
 
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var tree # For testing purposes
