@@ -66,3 +66,71 @@ func test_set_jump_velocity_HappyPath_SetsMaxJumpSpeed() -> void:
 	
 	# Then 
 	assert_eq(player.velocity.y, player.JUMP_VELOCITY)
+
+func test_add_head_bob_HappyPath_FollowsCurve() -> void:
+	# Given
+	var player : Player = autofree(Player.new())
+	var is_on_floor := true
+	var delta := 1
+	player.velocity = Vector3(1, 0, 1).normalized()
+	player.camera = autofree(Camera3D.new())
+	# When
+	player.add_head_bob(delta, is_on_floor)
+	# Then 
+	assert_almost_eq(player.camera.transform.origin.y, sin(delta * player.BOB_FREQUENCY)*player.BOB_AMPLITUDE, 0.01)
+
+func test_add_head_bob_WithHighSpeed_GoesQuicker() -> void:
+	# Given
+	var player : Player = autofree(Player.new())
+	var is_on_floor := true
+	var delta := 1
+	player.velocity = Vector3(10, 0, 10)
+	player.camera = autofree(Camera3D.new())
+	# When
+	player.add_head_bob(delta, is_on_floor)
+	# Then 
+	assert_almost_eq(player.camera.transform.origin.y, sin(delta * player.BOB_FREQUENCY*player.velocity.length())*player.BOB_AMPLITUDE, 0.01)
+
+func test_add_head_bob_WhenNotTouchingGround_DoesNothing() -> void:
+	# Given
+	var player : Player = autofree(Player.new())
+	var is_on_floor := false
+	var delta := 1
+	player.velocity = Vector3(10, 0, 10)
+	player.camera = autofree(Camera3D.new())
+	# When
+	player.add_head_bob(delta, is_on_floor)
+	# Then 
+	assert_almost_eq(player.camera.transform.origin.y, 0, 0.01)
+
+func test_add_head_bob_WhenCalledSeveralTimes_ContinuesCurve() -> void:
+	# Given
+	var player : Player = autofree(Player.new())
+	var is_on_floor := true
+	var delta := 1
+	player.velocity = Vector3(10, 0, 10)
+	player.camera = autofree(Camera3D.new())
+	# When
+	player.add_head_bob(delta, is_on_floor)
+	player.add_head_bob(delta, is_on_floor)
+	# Then 
+	assert_almost_eq(player.camera.transform.origin.y, sin(2 * delta * player.BOB_FREQUENCY*player.velocity.length())*player.BOB_AMPLITUDE, 0.01)
+
+func test_add_head_bob_WhenCalledAtDifferentFrameRates_IsEquivalent() -> void:
+	# Given
+	var is_on_floor := true
+	var delta := 1
+	# Player 1
+	var player1 : Player = autofree(Player.new())
+	player1.velocity = Vector3(10, 0, 10)
+	player1.camera = autofree(Camera3D.new())
+	# Player 2
+	var player2 : Player = autofree(Player.new())
+	player2.velocity = Vector3(10, 0, 10)
+	player2.camera = autofree(Camera3D.new())
+	# When
+	player1.add_head_bob(delta, is_on_floor)
+	player2.add_head_bob(delta*0.5, is_on_floor)
+	player2.add_head_bob(delta*0.5, is_on_floor)
+	# Then 
+	assert_almost_eq(player1.camera.transform.origin.y, player2.camera.transform.origin.y, 0.01)

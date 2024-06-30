@@ -9,11 +9,16 @@ const MIN_X_ROTATION_DEGREES = -40
 const MAX_X_ROTATION_DEGREES = 60
 const MIN_Y_WORLD_POSITION = -10
 
+const BOB_FREQUENCY = 2.0
+const BOB_AMPLITUDE = 0.08
+var t_bob = 0.0
+
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var tree # For testing purposes
 
 @onready var head_x : Node3D = $Head_X
 @onready var head_y : Node3D = $Head_X/Head_Y
+@onready var camera : Camera3D = $Head_X/Head_Y/Camera3D
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -38,6 +43,9 @@ func _physics_process(delta):
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	set_movement_velocity(input_dir)
+	
+	add_head_bob(delta, is_on_floor())
+	
 	move_and_slide()
 
 func set_movement_velocity(input_dir : Vector2) -> void:
@@ -51,6 +59,10 @@ func set_movement_velocity(input_dir : Vector2) -> void:
 
 func set_jump_velocity() -> void:
 	velocity.y = JUMP_VELOCITY
+
+func add_head_bob(delta : float, is_on_floor : bool) -> void:
+	t_bob += delta * velocity.length() * float(is_on_floor)
+	camera.transform.origin = Vector3(0, sin(t_bob * BOB_FREQUENCY) * BOB_AMPLITUDE, 0)
 
 func enforce_world_boundaries(player_position : Vector3) -> bool:
 	var in_world_boundaries := player_position.y > MIN_Y_WORLD_POSITION
