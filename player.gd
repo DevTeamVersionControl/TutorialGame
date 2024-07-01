@@ -1,10 +1,10 @@
 class_name Player
 extends CharacterBody3D
 
-const SPEED = 5.0
-const DECELERATION = 1
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.003
+const SPEED = 3.0
+const DECELERATION = 1.0
+const JUMP_VELOCITY = 3.0
+const SENSITIVITY = 0.002
 const MIN_X_ROTATION_DEGREES = -40
 const MAX_X_ROTATION_DEGREES = 60
 const MIN_Y_WORLD_POSITION = -10
