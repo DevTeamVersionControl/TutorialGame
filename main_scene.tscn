@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cllubx6m63ejy"]
+[gd_scene load_steps=21 format=3 uid="uid://cllubx6m63ejy"]
 
 [ext_resource type="PackedScene" uid="uid://dalkpem7nb8h8" path="res://tower_spot.tscn" id="1_710bw"]
+[ext_resource type="Material" uid="uid://cvwgf7mvbw1l5" path="res://islandmaterial.tres" id="1_atcig"]
 [ext_resource type="PackedScene" uid="uid://di1x7cpc2ow5c" path="res://player.tscn" id="2_2uye5"]
+[ext_resource type="Material" uid="uid://cx08wc5o6fbcv" path="res://bridgematerial.tres" id="2_hdgw8"]
 [ext_resource type="PackedScene" uid="uid://cl5q75lpk6qik" path="res://payload.tscn" id="2_odsyl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jye5g"]
@@ -74,6 +76,7 @@ shadow_enabled = true
 transform = Transform3D(0.994476, 0.00397739, -0.10489, -0.0139116, 0.995461, -0.0941497, 0.10404, 0.0950888, 0.990017, 0, 0, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island1"]
+material_override = ExtResource("1_atcig")
 mesh = SubResource("BoxMesh_amsyp")
 skeleton = NodePath("../../..")
 
@@ -84,6 +87,7 @@ shape = SubResource("BoxShape3D_jccas")
 transform = Transform3D(0.990275, 0, -0.139121, 0, 1, 0, 0.139121, 0, 0.990275, 17.1547, 1.52037, -13.586)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island2"]
+material_override = ExtResource("1_atcig")
 mesh = SubResource("BoxMesh_wl7w6")
 skeleton = NodePath("../../..")
 
@@ -94,6 +98,7 @@ shape = SubResource("BoxShape3D_lf0we")
 transform = Transform3D(0.0436193, 0, -0.999048, 0, 1, 0, 0.999048, 0, 0.0436193, 26.8886, 0.460512, 12.5741)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island3"]
+material_override = ExtResource("1_atcig")
 mesh = SubResource("BoxMesh_wcvxx")
 skeleton = NodePath("../../..")
 
@@ -106,6 +111,7 @@ shape = SubResource("BoxShape3D_kt1fq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Bridges/Bridge1"]
 transform = Transform3D(0.908144, -0.011304, -0.418505, -0.0518266, 0.988911, -0.139173, 0.415438, 0.148079, 0.897488, 4.082, 1.35, -7.32)
+material_override = ExtResource("2_hdgw8")
 mesh = SubResource("BoxMesh_iitr6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge1"]
@@ -120,6 +126,7 @@ shape = SubResource("BoxShape3D_0drms")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Bridges/Bridge2"]
 transform = Transform3D(0.99343, -0.0164591, -0.113252, 0.00553127, 0.995353, -0.0961368, 0.114308, 0.0948787, 0.988904, 25.4013, 1.38626, -2.91003)
+material_override = ExtResource("2_hdgw8")
 mesh = SubResource("BoxMesh_h2gve")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge2"]
