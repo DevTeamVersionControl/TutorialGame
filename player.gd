@@ -60,8 +60,8 @@ func set_movement_velocity(input_dir : Vector2) -> void:
 func set_jump_velocity() -> void:
 	velocity.y = JUMP_VELOCITY
 
-func add_head_bob(delta : float, is_on_floor : bool) -> void:
-	t_bob += delta * velocity.length() * float(is_on_floor)
+func add_head_bob(delta : float, on_floor : bool) -> void:
+	t_bob += delta * velocity.length() * float(on_floor)
 	camera.transform.origin = Vector3(0, sin(t_bob * BOB_FREQUENCY) * BOB_AMPLITUDE, 0)
 
 func enforce_world_boundaries(player_position : Vector3) -> bool:
