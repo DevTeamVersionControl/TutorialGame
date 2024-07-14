@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://di1x7cpc2ow5c"]
+[gd_scene load_steps=6 format=3 uid="uid://di1x7cpc2ow5c"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_2ev8r"]
+[ext_resource type="Script" path="res://shooter.gd" id="2_bj675"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2gpeb"]
 
@@ -30,7 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67928, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head_X/Head_Y"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head_X/Head_Y"]
+[node name="Arm" type="MeshInstance3D" parent="Head_X/Head_Y"]
 transform = Transform3D(0.903455, 0.279884, -0.324706, 0, 0.757451, 0.652892, 0.428683, -0.589859, 0.684323, 0.412378, -0.109714, -0.730124)
 mesh = SubResource("CylinderMesh_50ecp")
 skeleton = NodePath("../..")
+
+[node name="ShootPosition" type="Node3D" parent="Head_X/Head_Y/Arm"]
+transform = Transform3D(1, 0, 0, 7.15256e-07, 1, 2.98023e-08, -2.98023e-08, -2.98023e-08, 1, -0.0328523, 0.454167, -0.00289547)
+script = ExtResource("2_bj675")
+
+[node name="BulletCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

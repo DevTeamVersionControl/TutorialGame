@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ceifs6i8w4h"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_acbg0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vgk8x"]
+radius = 0.025
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g47i4"]
+albedo_color = Color(0.972549, 0.368627, 0.184314, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_opmn3"]
+points = PackedVector3Array(0.0202345, 0.0349132, 0.0154712, -0.0257936, -0.0317411, -0.00356661, -0.0257936, -0.0317411, 0.00436026, 0.0202345, -0.0428484, -0.00356661, -0.00356661, 0.0365042, -0.0242042, -0.0194409, 0.0412674, 0.010713, 0.00277079, -0.0349132, 0.0249978, 0.0138869, -0.03015, -0.0226147, 0.0234083, 0.0365042, -0.00832991, -0.00991426, 0.0269779, 0.0249978, -0.0130932, -0.0412674, -0.0178565, -0.0226147, 0.0285689, -0.0146776, 0.0249978, -0.03015, 0.00912356, 0.00436026, 0.0507936, 0.00594974, -0.00515096, -0.0507936, 0.00594974, -0.0178514, -0.0285689, 0.0202345, -0.0115037, -0.0285689, -0.0242042, 0.00912356, 0.03015, 0.0249978, -0.0257936, 0.03015, 0.00594974, 0.0107079, 0.03015, -0.0242042, 0.0249978, -0.0269779, -0.00991939, -0.00356661, 0.0492026, -0.0115037, 0.0170556, -0.0317411, 0.0202345, 0.00436026, -0.0476116, -0.0146776, 0.00436026, -0.0317411, -0.0257936, 0.0122974, -0.0476116, 0.00912356, -0.00356661, 0.0428484, 0.0202345, 0.0249978, 0.03015, 0.00912356, 0.0202345, 0.0285689, -0.0178565, 0.0122974, 0.0460305, -0.0130932, -0.0210303, 0.0269779, 0.0170607, -0.016267, 0.0460305, -0.00674557)
+
+[node name="Bullet" type="Area3D"]
+script = ExtResource("1_acbg0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_vgk8x")
+surface_material_override/0 = SubResource("StandardMaterial3D_g47i4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_opmn3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

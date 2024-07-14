@@ -1,35 +1,75 @@
-#extends GutTest
-#
-#const player_scene = preload("res://player.tscn")
-#var _sender = InputSender.new(Input)
-#
-#func after_each():
-	#_sender.release_all()
-	#_sender.clear()
-#
-#func test__physics_process_WhenHeadStraight_MovesForwardsCorrectly() -> void:
-	## Given
-	#var player : Player = player_scene.instantiate()
-	#add_child_autofree(player)
-	#var expected_velocity := Vector3.FORWARD
-	#
-	## When
-	#_sender.action_down("move_forwards").wait_frames(1)
-	#await(_sender.idle)
-	#
-	## Then
-	#assert_eq(player.velocity.normalized(), expected_velocity)
-#
-#func test__physics_process_WhenHeadRotated_MovesForwardsCorrectly() -> void:
-	## Given
-	#var player : Player = player_scene.instantiate()
-	#add_child_autofree(player)
-	#player.head_x.rotate_y(PI/2)
-	#var expected_velocity := Vector3.FORWARD.rotated(Vector3.UP, PI/2)
-	#
-	## When
-	#_sender.action_down("move_forwards").wait_frames(1)
-	#await(_sender.idle)
-	#
-	## Then
-	#assert_eq(player.velocity.normalized(), expected_velocity)
+extends GutTest
+
+const player_scene = preload("res://player.tscn")
+var _sender = InputSender.new(Input)
+
+func after_each():
+	_sender.release_all()
+	_sender.clear()
+
+func test_shoot_WhenPressingLeftMouse_Shoots() -> void:
+	# Given
+	var player : Player = player_scene.instantiate()
+	add_child_autofree(player)
+	player.shooter = autofree(double(Shooter).new())
+	player.add_child(player.shooter)
+	
+	var timer : Timer = player.get_node("BulletCooldownTimer")
+	
+	# When
+	player.shoot()
+	
+	# Then
+	assert_false(timer.is_stopped())
+	assert_called(player.shooter, "shoot")
+
+func test_shoot_WhenShootingTwiceBeforeCooldown_ShootsOnlyOnce() -> void:
+	# Given
+	var player : Player = player_scene.instantiate()
+	add_child_autofree(player)
+	player.shooter = autofree(double(Shooter).new())
+	player.add_child(player.shooter)
+	
+	var timer : Timer = player.get_node("BulletCooldownTimer")
+	
+	# When
+	player.shoot()
+	await wait_frames(1)
+	player.shoot()
+	
+	# Then
+	assert_false(timer.is_stopped())
+	assert_call_count(player.shooter, "shoot", 1)
+
+func test_shoot_WhenCooldownIsOver_CanShootAgain() -> void:
+	# Given
+	var player : Player = player_scene.instantiate()
+	add_child_autofree(player)
+	
+	player.shooter = autofree(double(Shooter).new())
+	player.add_child(player.shooter)
+	
+	var timer : Timer = player.get_node("BulletCooldownTimer")
+	timer.wait_time = 0.1
+	
+	# When
+	player.shoot()
+	await wait_seconds(0.2)
+	player.shoot()
+	
+	# Then
+	assert_false(timer.is_stopped())
+	assert_call_count(player.shooter, "shoot", 2)
+	
+func test_timer() -> void:
+	# Given
+	var test_timer := Timer.new()
+	add_child_autofree(test_timer)
+	test_timer.wait_time = 0.1
+	
+	# When
+	test_timer.start()
+	await wait_seconds(0.2)
+	
+	# Then
+	assert_true(test_timer.is_stopped())
