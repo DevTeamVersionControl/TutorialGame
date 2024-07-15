@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://cllubx6m63ejy"]
+[gd_scene load_steps=22 format=3 uid="uid://cllubx6m63ejy"]
 
 [ext_resource type="PackedScene" uid="uid://dalkpem7nb8h8" path="res://tower_spot.tscn" id="1_710bw"]
 [ext_resource type="Material" uid="uid://cvwgf7mvbw1l5" path="res://islandmaterial.tres" id="1_atcig"]
 [ext_resource type="PackedScene" uid="uid://di1x7cpc2ow5c" path="res://player.tscn" id="2_2uye5"]
 [ext_resource type="Material" uid="uid://cx08wc5o6fbcv" path="res://bridgematerial.tres" id="2_hdgw8"]
 [ext_resource type="PackedScene" uid="uid://cl5q75lpk6qik" path="res://payload.tscn" id="2_odsyl"]
+[ext_resource type="PackedScene" uid="uid://6hmjyoi1nph2" path="res://damageable.tscn" id="6_rmraa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jye5g"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -230,3 +231,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3892, -6.52664, 32.0391)
 
 [node name="maxbounds" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.4451, 12.9237, -35.241)
+
+[node name="Damageable" parent="." instance=ExtResource("6_rmraa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27216, 0.736948, -0.633358)

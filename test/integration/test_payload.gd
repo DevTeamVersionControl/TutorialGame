@@ -24,7 +24,7 @@ func test_follow_line_HappyPath_FollowsPath() -> void:
 	payload.follow_line(time)
 	await wait_frames(1)
 	# Then
-	assert_eq(payload.progress, 1)
+	assert_eq(payload.progress, 1.0)
 	var target_position = path.global_position + path.curve.get_point_position(1)
 	assert_almost_eq(payload.global_position, target_position, Vector3.ONE * 0.01)
 
@@ -71,7 +71,7 @@ func test_follow_line_WhenGetsToLastPoint_ReloadsLevel() -> void:
 	payload.can_advance = true
 	payload.speed = 1.0
 	payload.progress_ratio = 0.95
-	var time = 1
+	var time = 1.0
 	# When
 	payload.follow_line(time)
 	await wait_frames(1)

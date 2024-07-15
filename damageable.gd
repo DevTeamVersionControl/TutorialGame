@@ -16,6 +16,8 @@ func _ready() -> void:
 		mesh_instance.set_surface_override_material(0, material)
 
 func take_damage(damage : float, _direction : Vector3) -> void:
+	if damage < 0.0:
+		return
 	emit_signal("took_damage")
 	
 	health -= damage

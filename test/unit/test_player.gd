@@ -83,7 +83,7 @@ func test_add_head_bob_WithHighSpeed_GoesQuicker() -> void:
 	# Given
 	var player : Player = autofree(Player.new())
 	var is_on_floor := true
-	var delta := 1
+	var delta := 1.0
 	player.velocity = Vector3(10, 0, 10)
 	player.camera = autofree(Camera3D.new())
 	# When
@@ -95,13 +95,13 @@ func test_add_head_bob_WhenNotTouchingGround_DoesNothing() -> void:
 	# Given
 	var player : Player = autofree(Player.new())
 	var is_on_floor := false
-	var delta := 1
+	var delta := 1.0
 	player.velocity = Vector3(10, 0, 10)
 	player.camera = autofree(Camera3D.new())
 	# When
 	player.add_head_bob(delta, is_on_floor)
 	# Then 
-	assert_almost_eq(player.camera.transform.origin.y, 0, 0.01)
+	assert_almost_eq(player.camera.transform.origin.y, 0.0, 0.01)
 
 func test_add_head_bob_WhenCalledSeveralTimes_ContinuesCurve() -> void:
 	# Given
