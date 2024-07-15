@@ -52,7 +52,6 @@ func test_update_speed_WhenCanNotAdvance_ReducesSpeed() -> void:
 	# Given
 	var values = setup_test_scene()
 	var payload : Payload = values["payload"]
-	var path : Path3D = values["path"]
 	payload.can_advance = false
 	payload.speed = 1.0
 	payload.acceleration = 0.5

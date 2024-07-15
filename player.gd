@@ -19,6 +19,8 @@ var tree # For testing purposes
 @onready var head_x : Node3D = $Head_X
 @onready var head_y : Node3D = $Head_X/Head_Y
 @onready var camera : Camera3D = $Head_X/Head_Y/Camera3D
+@onready var shooter : Shooter = $Head_X/Head_Y/Arm/ShootPosition
+@onready var bullet_cooldown_timer = $BulletCooldownTimer
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -40,6 +42,8 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		set_jump_velocity()
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	set_movement_velocity(input_dir)
@@ -69,3 +73,11 @@ func enforce_world_boundaries(player_position : Vector3) -> bool:
 	if not in_world_boundaries:
 		tree.reload_current_scene()
 	return not in_world_boundaries
+
+func shoot() -> void:
+	if not bullet_cooldown_timer.is_stopped():
+		return
+	
+	var direction = camera.project_position(get_viewport().size/2, 1) - camera.global_position
+	bullet_cooldown_timer.start()
+	shooter.shoot(direction)
