@@ -60,16 +60,3 @@ func test_shoot_WhenCooldownIsOver_CanShootAgain() -> void:
 	# Then
 	assert_false(timer.is_stopped())
 	assert_call_count(player.shooter, "shoot", 2)
-	
-func test_timer() -> void:
-	# Given
-	var test_timer := Timer.new()
-	add_child_autofree(test_timer)
-	test_timer.wait_time = 0.1
-	
-	# When
-	test_timer.start()
-	await wait_seconds(0.2)
-	
-	# Then
-	assert_true(test_timer.is_stopped())
