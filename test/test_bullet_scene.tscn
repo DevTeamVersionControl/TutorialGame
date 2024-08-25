@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4107shcabaht"]
 
-[ext_resource type="PackedScene" uid="uid://6hmjyoi1nph2" path="res://damageable/damageable.tscn" id="1_xoa3n"]
+[ext_resource type="PackedScene" uid="uid://6hmjyoi1nph2" path="res://game_objects/damageable/damageable.tscn" id="1_xoa3n"]
 [ext_resource type="PackedScene" uid="uid://2ceifs6i8w4h" path="res://bullet/bullet.tscn" id="2_angsp"]
 
 [node name="Node3D" type="Node3D"]
