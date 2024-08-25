@@ -1,6 +1,6 @@
 extends GutTest
 
-const player_scene = preload("res://player.tscn")
+const player_scene = preload("res://player/player.tscn")
 var _sender = InputSender.new(Input)
 
 func after_each():

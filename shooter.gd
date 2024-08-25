@@ -1,7 +1,7 @@
 class_name Shooter
 extends Node3D
 
-const BULLET_SCENE = preload("res://bullet.tscn")
+const BULLET_SCENE = preload("res://bullet/bullet.tscn")
 
 var bullet_damage : float = 5
 var bullet_speed : float = 5
