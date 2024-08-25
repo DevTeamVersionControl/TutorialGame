@@ -102,8 +102,8 @@ func test_update_can_advance_WhenPlayerIsNotInZone_SetsFalse() -> void:
 	assert_false(payload.can_advance)
 
 func setup_test_scene() -> Dictionary:
-	var player = preload("res://player.tscn").instantiate()
-	var payload = preload("res://payload.tscn").instantiate()
+	var player = preload("res://player/player.tscn").instantiate()
+	var payload = preload("res://payload/payload.tscn").instantiate()
 	payload.player = player
 	add_child_autofree(player)
 	player.axis_lock_linear_y = true
