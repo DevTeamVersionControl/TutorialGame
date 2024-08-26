@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://6hmjyoi1nph2"]
+
+[ext_resource type="Script" path="res://game_objects/damageable/damageable.gd" id="1_warcw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kgfd4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_106k1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6l6ds"]
+
+[node name="Damageable" type="StaticBody3D"]
+script = ExtResource("1_warcw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kgfd4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_106k1")
+surface_material_override/0 = SubResource("StandardMaterial3D_6l6ds")

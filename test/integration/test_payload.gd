@@ -84,6 +84,7 @@ func test_update_can_advance_WhenPlayerIsInZone_SetsTrue() -> void:
 	var values = setup_test_scene()
 	var payload : Payload = values["payload"]
 	# When
+	await wait_frames(2)
 	payload.update_can_advance()
 	# Then
 	assert_true(payload.can_advance)
@@ -97,6 +98,7 @@ func test_update_can_advance_WhenPlayerIsNotInZone_SetsFalse() -> void:
 	var player : Player = values["player"]
 	player.global_position = Vector3(10,0,10)
 	# When
+	await wait_frames(2)
 	payload.update_can_advance()
 	# Then
 	assert_false(payload.can_advance)
@@ -104,7 +106,6 @@ func test_update_can_advance_WhenPlayerIsNotInZone_SetsFalse() -> void:
 func setup_test_scene() -> Dictionary:
 	var player = preload("res://game_objects/player/player.tscn").instantiate()
 	var payload = preload("res://game_objects/payload/payload.tscn").instantiate()
-	payload.player = player
 	add_child_autofree(player)
 	player.axis_lock_linear_y = true
 	var path = Path3D.new()

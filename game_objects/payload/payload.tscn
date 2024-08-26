@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl5q75lpk6qik"]
+
+[ext_resource type="Script" path="res://game_objects/payload/payload.gd" id="1_li7n0"]
+[ext_resource type="Script" path="res://game_objects/payload/detection_zone.gd" id="2_56e7e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nws2"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.423529)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jfey1"]
+material = SubResource("StandardMaterial3D_7nws2")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vfotr"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_eua2x"]
+size = Vector3(0.5, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pngpn"]
+albedo_color = Color(0.533037, 0.533037, 0.533037, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4qi2"]
+size = Vector3(0.5, 0.25, 1)
+
+[node name="Payload" type="PathFollow3D"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
+script = ExtResource("1_li7n0")
+
+[node name="DetectionZoneVisualisation" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 2.98023e-08, -3.72529e-09, 1, 0, 0.25, 0)
+mesh = SubResource("SphereMesh_jfey1")
+
+[node name="DetectionZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+script = ExtResource("2_56e7e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone"]
+shape = SubResource("CapsuleShape3D_vfotr")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+sync_to_physics = false
+
+[node name="Body" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, -3.72529e-09, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_eua2x")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pngpn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, -3.72529e-09, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_x4qi2")
