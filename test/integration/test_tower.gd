@@ -19,8 +19,6 @@ func test_PlayerOutOfRange_DoesNothing() -> void:
 	var tower : Tower = values["tower"]
 	tower.initialize(default_tower_spawn_request)
 	tower.shooter.bullet_speed = 50
-	print("out player_position : ",player.global_position)
-	print("out tower_position : ",tower.global_position)
 	
 	# When
 	await wait_for_signal(player.took_damage, 1.5)
@@ -37,8 +35,6 @@ func test_PlayerInRange_ShootsAtPlayer() -> void:
 	var tower : Tower = values["tower"]
 	tower.initialize(default_tower_spawn_request)
 	tower.shooter.bullet_speed = 50
-	print("shoots player_position : ",player.global_position)
-	print("shoots tower_position : ",tower.global_position)
 	
 	# When
 	await wait_for_signal(player.took_damage, 1)
@@ -56,8 +52,6 @@ func test_PlayerShootsTower_TowerTakesDamage() -> void:
 	
 	var tower : Tower = values["tower"]
 	tower.health = 100.0
-	print("tower player_position : ",player.global_position)
-	print("tower tower_position : ",tower.global_position)
 	
 	# When
 	await wait_frames(1)
