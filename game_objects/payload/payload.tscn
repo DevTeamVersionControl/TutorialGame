@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cl5q75lpk6qik"]
 
 [ext_resource type="Script" path="res://game_objects/payload/payload.gd" id="1_li7n0"]
-[ext_resource type="Script" path="res://game_objects/payload/detection_zone.gd" id="2_56e7e"]
+[ext_resource type="Script" path="res://common/detection_zone.gd" id="2_56e7e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nws2"]
 transparency = 1

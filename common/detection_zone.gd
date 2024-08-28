@@ -1,7 +1,7 @@
 extends Area3D
 class_name DetectionZone
 
-@onready var collision_shape := CollisionShape3D
+@onready var collision_shape := $CollisionShape3D
 
 func is_player_in_zone() -> bool:
 	var overlapping_bodies : Array[Node3D] = get_overlapping_bodies()

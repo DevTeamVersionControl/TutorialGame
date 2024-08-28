@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="TutorialGame"
-run/main_scene="res://main_scene.tscn"
+run/main_scene="res://scenes/main_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalVars="*res://global_vars.gd"
+GlobalVars="*res://common/global_vars.gd"
+RessourceMappings="*res://common/ressource_mappings.gd"
+
+[debug]
+
+gdscript/warnings/redundant_await=0
 
 [display]
 

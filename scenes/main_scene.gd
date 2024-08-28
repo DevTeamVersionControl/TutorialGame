@@ -4,5 +4,5 @@ extends Node3D
 
 func _ready():
 	if test_tower_spot != null:
-		test_tower_spot.spawn_tower(TowerSpawnRequest.new(5,5,5))
+		test_tower_spot.spawn_tower(TowerSpawnRequest.new(50, 2, 10, 5))
 
