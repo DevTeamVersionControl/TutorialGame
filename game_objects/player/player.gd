@@ -1,5 +1,5 @@
 class_name Player
-extends CharacterBody3D
+extends CharacterDamageable
 
 const SPEED = 3.0
 const DECELERATION = 1.0
@@ -21,6 +21,7 @@ var tree # For testing purposes
 @onready var camera : Camera3D = $Head_X/Head_Y/Camera3D
 @onready var shooter : Shooter = $Head_X/Head_Y/Arm/ShootPosition
 @onready var bullet_cooldown_timer = $BulletCooldownTimer
+@onready var target : Node3D = $Target
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -4,13 +4,12 @@ extends PathFollow3D
 var can_advance := false
 var block := false
 var tree # For testing purposes
-@export var player : Player
 @export var speed : float = 0
 @export var max_speed : float = 1.0
 @export var acceleration := 0.5
 
 @onready var path : Path3D = get_parent()
-@onready var detection_zone : MeshInstance3D = $DetectionZone
+@onready var detection_zone : DetectionZone = $DetectionZone
 
 func _ready():
 	tree = get_tree()
@@ -33,8 +32,7 @@ func _physics_process(delta):
 		follow_line(delta)
 
 func update_can_advance() -> void:
-	var new_can_advance : bool = (player.global_position - global_position).length() <= detection_zone.mesh.radius
-	can_advance = new_can_advance
+	can_advance = detection_zone.is_player_in_zone()
 
 func update_speed(delta_time : float) -> void:
 	var new_speed = speed + acceleration * delta_time * (1.0 if can_advance else -1.0)

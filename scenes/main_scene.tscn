@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://cllubx6m63ejy"]
+[gd_scene load_steps=23 format=3 uid="uid://cllubx6m63ejy"]
 
-[ext_resource type="PackedScene" uid="uid://dalkpem7nb8h8" path="res://tower_spot/tower_spot.tscn" id="1_710bw"]
-[ext_resource type="Material" uid="uid://cvwgf7mvbw1l5" path="res://islandmaterial.tres" id="1_atcig"]
-[ext_resource type="PackedScene" uid="uid://di1x7cpc2ow5c" path="res://player/player.tscn" id="2_2uye5"]
-[ext_resource type="Material" uid="uid://cx08wc5o6fbcv" path="res://bridgematerial.tres" id="2_hdgw8"]
-[ext_resource type="PackedScene" uid="uid://cl5q75lpk6qik" path="res://payload/payload.tscn" id="2_odsyl"]
-[ext_resource type="PackedScene" uid="uid://6hmjyoi1nph2" path="res://damageable/damageable.tscn" id="6_rmraa"]
+[ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_i62sa"]
+[ext_resource type="Material" uid="uid://cvwgf7mvbw1l5" path="res://scenes/islandmaterial.tres" id="2_8va5o"]
+[ext_resource type="Material" uid="uid://cx08wc5o6fbcv" path="res://scenes/bridgematerial.tres" id="3_unemo"]
+[ext_resource type="PackedScene" uid="uid://dalkpem7nb8h8" path="res://game_objects/tower_spot/tower_spot.tscn" id="4_j8ro2"]
+[ext_resource type="PackedScene" uid="uid://cl5q75lpk6qik" path="res://game_objects/payload/payload.tscn" id="5_maco2"]
+[ext_resource type="PackedScene" uid="uid://di1x7cpc2ow5c" path="res://game_objects/player/player.tscn" id="6_1i8r8"]
+[ext_resource type="PackedScene" uid="uid://6hmjyoi1nph2" path="res://game_objects/damageable/damageable.tscn" id="7_cm8ca"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jye5g"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -60,7 +61,9 @@ _data = {
 }
 point_count = 16
 
-[node name="MainScene" type="Node3D"]
+[node name="MainScene" type="Node3D" node_paths=PackedStringArray("test_tower_spot")]
+script = ExtResource("1_i62sa")
+test_tower_spot = NodePath("Towers/TowerSpot")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n3ka6")
@@ -77,7 +80,7 @@ shadow_enabled = true
 transform = Transform3D(0.994476, 0.00397739, -0.10489, -0.0139116, 0.995461, -0.0941497, 0.10404, 0.0950888, 0.990017, 0, 0, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island1"]
-material_override = ExtResource("1_atcig")
+material_override = ExtResource("2_8va5o")
 mesh = SubResource("BoxMesh_amsyp")
 skeleton = NodePath("../../..")
 
@@ -88,7 +91,7 @@ shape = SubResource("BoxShape3D_jccas")
 transform = Transform3D(0.990275, 0, -0.139121, 0, 1, 0, 0.139121, 0, 0.990275, 17.1547, 1.52037, -13.586)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island2"]
-material_override = ExtResource("1_atcig")
+material_override = ExtResource("2_8va5o")
 mesh = SubResource("BoxMesh_wl7w6")
 skeleton = NodePath("../../..")
 
@@ -99,7 +102,7 @@ shape = SubResource("BoxShape3D_lf0we")
 transform = Transform3D(0.0436193, 0, -0.999048, 0, 1, 0, 0.999048, 0, 0.0436193, 26.8886, 0.460512, 12.5741)
 
 [node name="Mesh" type="MeshInstance3D" parent="Environment/Islands/Island3"]
-material_override = ExtResource("1_atcig")
+material_override = ExtResource("2_8va5o")
 mesh = SubResource("BoxMesh_wcvxx")
 skeleton = NodePath("../../..")
 
@@ -112,7 +115,7 @@ shape = SubResource("BoxShape3D_kt1fq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Bridges/Bridge1"]
 transform = Transform3D(0.908144, -0.011304, -0.418505, -0.0518266, 0.988911, -0.139173, 0.415438, 0.148079, 0.897488, 4.082, 1.35, -7.32)
-material_override = ExtResource("2_hdgw8")
+material_override = ExtResource("3_unemo")
 mesh = SubResource("BoxMesh_iitr6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge1"]
@@ -127,7 +130,7 @@ shape = SubResource("BoxShape3D_0drms")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Bridges/Bridge2"]
 transform = Transform3D(0.99343, -0.0164591, -0.113252, 0.00553127, 0.995353, -0.0961368, 0.114308, 0.0948787, 0.988904, 25.4013, 1.38626, -2.91003)
-material_override = ExtResource("2_hdgw8")
+material_override = ExtResource("3_unemo")
 mesh = SubResource("BoxMesh_h2gve")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Bridges/Bridge2"]
@@ -140,76 +143,76 @@ shape = SubResource("BoxShape3D_0drms")
 
 [node name="Towers" type="Node3D" parent="."]
 
-[node name="TowerSpot" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.992431, -0.122805, 0, 0.122805, 0.992431, -2.1683, 0.989566, -3.09224)
 
-[node name="TowerSpot2" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot2" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.992431, -0.122805, 0, 0.122805, 0.992431, 1.20179, 0.303079, 3.53658)
 
-[node name="TowerSpot3" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot3" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.992431, -0.122805, 0, 0.122805, 0.992431, 2.76728, 0.459578, 1.7502)
 
-[node name="TowerSpot4" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot4" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 4.9867, 2.16042, -18.7608)
 
-[node name="TowerSpot5" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot5" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 4.01318, 2.20504, -14.1559)
 
-[node name="TowerSpot6" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot6" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 8.87809, 2.20504, -16.0749)
 
-[node name="TowerSpot7" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot7" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 8.87809, 2.20504, -13.6676)
 
-[node name="TowerSpot8" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot8" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 12.8633, 2.13728, -14.5551)
 
-[node name="TowerSpot9" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot9" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 17.1656, 2.13728, -15.375)
 
-[node name="TowerSpot10" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot10" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 17.1656, 2.13728, -12.0573)
 
-[node name="TowerSpot11" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot11" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 21.3299, 2.13728, -13.3795)
 
-[node name="TowerSpot12" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot12" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 26.1216, 2.13794, -12.3067)
 
-[node name="TowerSpot13" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot13" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 30.1012, 2.13794, -14.9757)
 
-[node name="TowerSpot14" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot14" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 30.1012, 1.18091, 3.38338)
 
-[node name="TowerSpot15" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot15" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 27.6921, 1.18091, 3.38338)
 
-[node name="TowerSpot16" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot16" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 28.9737, 1.18091, 6.98772)
 
-[node name="TowerSpot17" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot17" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 28.9737, 1.18091, 11.3808)
 
-[node name="TowerSpot18" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot18" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 22.9017, 1.18091, 11.3808)
 
-[node name="TowerSpot19" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot19" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 22.9017, 1.18091, 4.53186)
 
-[node name="TowerSpot20" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot20" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 22.9017, 1.18091, 17.7085)
 
-[node name="TowerSpot21" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot21" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 30.1317, 1.18091, 17.7085)
 
-[node name="TowerSpot22" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot22" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 26.9974, 1.18091, 21.1977)
 
-[node name="TowerSpot23" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot23" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 29.5562, 1.18091, 21.1977)
 
-[node name="TowerSpot24" parent="Towers" instance=ExtResource("1_710bw")]
+[node name="TowerSpot24" parent="Towers" instance=ExtResource("4_j8ro2")]
 transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.999998, 23.8856, 1.18091, 21.1977)
 
 [node name="Route" type="Node3D" parent="."]
@@ -219,11 +222,10 @@ transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.9999
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.127686, 1.32013, -0.688011)
 curve = SubResource("Curve3D_iudv8")
 
-[node name="Payload" parent="Route/Path3D" node_paths=PackedStringArray("player") instance=ExtResource("2_odsyl")]
+[node name="Payload" parent="Route/Path3D" instance=ExtResource("5_maco2")]
 transform = Transform3D(0.808478, -0.0451794, -0.586788, -1.86264e-09, 0.997048, -0.0767671, 0.588525, 0.0620646, 0.806092, -25.0614, -1.81251, -19.4889)
-player = NodePath("../../../Player")
 
-[node name="Player" parent="." instance=ExtResource("2_2uye5")]
+[node name="Player" parent="." instance=ExtResource("6_1i8r8")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.410413, 0.536, 1.58252)
 
 [node name="minbounds" type="Node3D" parent="."]
@@ -232,5 +234,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3892, -6.52664, 32.0391)
 [node name="maxbounds" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.4451, 12.9237, -35.241)
 
-[node name="Damageable" parent="." instance=ExtResource("6_rmraa")]
+[node name="Damageable" parent="." instance=ExtResource("7_cm8ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27216, 0.736948, -0.633358)

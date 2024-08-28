@@ -1,15 +1,8 @@
 extends GutTest
 
-const player_scene = preload("res://player/player.tscn")
-var _sender = InputSender.new(Input)
-
-func after_each():
-	_sender.release_all()
-	_sender.clear()
-
 func test_shoot_WhenPressingLeftMouse_Shoots() -> void:
 	# Given
-	var player : Player = player_scene.instantiate()
+	var player : Player = RessourceMappings.PLAYER_SCENE.instantiate()
 	add_child_autofree(player)
 	player.shooter = autofree(double(Shooter).new())
 	player.add_child(player.shooter)
@@ -25,7 +18,7 @@ func test_shoot_WhenPressingLeftMouse_Shoots() -> void:
 
 func test_shoot_WhenShootingTwiceBeforeCooldown_ShootsOnlyOnce() -> void:
 	# Given
-	var player : Player = player_scene.instantiate()
+	var player : Player = RessourceMappings.PLAYER_SCENE.instantiate()
 	add_child_autofree(player)
 	player.shooter = autofree(double(Shooter).new())
 	player.add_child(player.shooter)
@@ -43,7 +36,7 @@ func test_shoot_WhenShootingTwiceBeforeCooldown_ShootsOnlyOnce() -> void:
 
 func test_shoot_WhenCooldownIsOver_CanShootAgain() -> void:
 	# Given
-	var player : Player = player_scene.instantiate()
+	var player : Player = RessourceMappings.PLAYER_SCENE.instantiate()
 	add_child_autofree(player)
 	
 	player.shooter = autofree(double(Shooter).new())

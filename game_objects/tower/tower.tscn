@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl36kkjlpcnbq"]
+
+[ext_resource type="Script" path="res://game_objects/tower/tower.gd" id="1_4sffq"]
+[ext_resource type="Material" uid="uid://c5kd8b1dyhguq" path="res://game_objects/tower/tower_shooter_material.tres" id="2_ftkgt"]
+[ext_resource type="Script" path="res://common/shooter.gd" id="2_wdhh3"]
+[ext_resource type="Script" path="res://common/detection_zone.gd" id="4_uhuv6"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yksa4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kwatw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_isy67"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0opfe"]
+radius = 4.0
+height = 8.0
+
+[node name="Tower" type="StaticBody3D"]
+script = ExtResource("1_4sffq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_yksa4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_kwatw")
+
+[node name="Shooter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+script = ExtResource("2_wdhh3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shooter"]
+material_override = ExtResource("2_ftkgt")
+mesh = SubResource("CapsuleMesh_isy67")
+skeleton = NodePath("../..")
+
+[node name="DetectionZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+script = ExtResource("4_uhuv6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone"]
+shape = SubResource("CapsuleShape3D_0opfe")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

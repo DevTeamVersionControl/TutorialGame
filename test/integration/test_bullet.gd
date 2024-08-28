@@ -2,7 +2,7 @@ extends GutTest
 
 func test_bullet_HappyPath() -> void:
 	# Given
-	var scene = preload("res://test/test_bullet_scene.tscn").instantiate()
+	var scene = RessourceMappings.TEST_BULLET_SCENE.instantiate()
 	add_child_autofree(scene)
 	var bullet : Bullet = scene.get_node("Bullet")
 	var damageable : Damageable = scene.get_node("Damageable")
