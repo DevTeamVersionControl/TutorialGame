@@ -21,7 +21,7 @@ func test_PlayerOutOfRange_DoesNothing() -> void:
 	tower.shooter.bullet_speed = 50
 	
 	# When
-	await wait_for_signal(player.took_damage, 1.5)
+	await wait_for_signal(player.took_damage, 0.5)
 	
 	# Then
 	assert_signal_not_emitted(player, "took_damage")
@@ -37,7 +37,7 @@ func test_PlayerInRange_ShootsAtPlayer() -> void:
 	tower.shooter.bullet_speed = 50
 	
 	# When
-	await wait_for_signal(player.took_damage, 1)
+	await wait_for_signal(player.took_damage, 0.5)
 	
 	# Then
 	assert_signal_emitted(player, "took_damage")
@@ -56,7 +56,7 @@ func test_PlayerShootsTower_TowerTakesDamage() -> void:
 	# When
 	await wait_frames(1)
 	player.shoot()
-	await wait_for_signal(tower.took_damage, 1.5)
+	await wait_for_signal(tower.took_damage, 0.5)
 	
 	# Then
 	assert_not_freed(tower, "tower")

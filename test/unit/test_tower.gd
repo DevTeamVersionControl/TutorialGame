@@ -38,3 +38,50 @@ func test_body_entered_GivenPlayer_KeepsReference_DisconnectsBodyEntered_Connect
 	assert_eq(tower.player_detector.body_entered.get_connections().size(), 0)
 	assert_eq(tower.player_detector.body_exited.get_connections().size(), 1)
 
+func test_body_entered_GivenNotPlayer_DoesNothing() -> void:
+	# Given
+	var not_player : Bullet = autofree(Bullet.new())
+	var tower : Tower = autofree(Tower.new())
+	tower.player_detector = autofree(DetectionZone.new())
+	tower.player_detector.body_entered.connect(tower.body_entered)
+	
+	# When
+	tower.body_entered(not_player)
+	
+	# Then
+	assert_eq(tower.player, null)
+	assert_eq(tower.player_detector.body_entered.get_connections().size(), 1)
+	assert_eq(tower.player_detector.body_exited.get_connections().size(), 0)
+
+func test_body_exited_GivenPlayer_ErasesReference_DisconnectsBodyExited_ConnectsBodyEntered() -> void:
+	# Given
+	var player : Player = autofree(Player.new())
+	var tower : Tower = autofree(Tower.new())
+	tower.player_detector = autofree(DetectionZone.new())
+	tower.player_detector.body_entered.connect(tower.body_entered)
+	
+	# When
+	tower.body_entered(player)
+	tower.body_exited(player)
+	
+	# Then
+	assert_eq(tower.player, null)
+	assert_eq(tower.player_detector.body_entered.get_connections().size(), 1)
+	assert_eq(tower.player_detector.body_exited.get_connections().size(), 0)
+
+func test_body_exited_GivenNotPlayer_DoesNothing() -> void:
+	# Given
+	var not_player : Bullet = autofree(Bullet.new())
+	var player : Player = autofree(Player.new())
+	var tower : Tower = autofree(Tower.new())
+	tower.player_detector = autofree(DetectionZone.new())
+	tower.player_detector.body_entered.connect(tower.body_entered)
+	
+	# When
+	tower.body_entered(player)
+	tower.body_exited(not_player)
+	
+	# Then
+	assert_eq(tower.player, player)
+	assert_eq(tower.player_detector.body_entered.get_connections().size(), 0)
+	assert_eq(tower.player_detector.body_exited.get_connections().size(), 1)
