@@ -25,9 +25,12 @@ func get_all_tower_spots(tower_spots_parent : Node) -> Array[TowerSpot]:
 			cast_tower_spots.append(child as TowerSpot)
 	return cast_tower_spots
 
-func spawn_towers(tower_spots_parent : Node) -> void:
+func new_level(tower_spots_parent : Node) -> void:
 	tower_spots = get_all_tower_spots(tower_spots_parent)
 	if level == 0:
 		initialize()
+	spawn_towers()
+
+func spawn_towers() -> void:
 	for tower_spot_index in active_tower_spots.keys() as Array:
 		tower_spots[tower_spot_index].spawn_tower(active_tower_spots[tower_spot_index] as TowerSpawnRequest)
