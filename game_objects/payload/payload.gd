@@ -1,6 +1,8 @@
 class_name Payload
 extends PathFollow3D
 
+signal payload_finished
+
 var can_advance := false
 var block := false
 var tree # For testing purposes
@@ -20,7 +22,7 @@ func initialise_payload() -> void:
 func follow_line(delta_time : float) -> void:
 	var new_progress := progress + speed * delta_time
 	if new_progress >= path.curve.get_baked_length():
-		tree.reload_current_scene()
+		payload_finished.emit()
 	elif new_progress < 0:
 		return
 	progress = new_progress

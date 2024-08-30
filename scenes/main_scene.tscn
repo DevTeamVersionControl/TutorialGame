@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cllubx6m63ejy"]
+[gd_scene load_steps=24 format=3 uid="uid://cllubx6m63ejy"]
 
 [ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_i62sa"]
 [ext_resource type="Material" uid="uid://cvwgf7mvbw1l5" path="res://scenes/islandmaterial.tres" id="2_8va5o"]
@@ -60,6 +60,13 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 16
+
+[sub_resource type="Curve3D" id="Curve3D_1xdnc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -25.308, -0.509437, -20.2683, 0, 0, 0, 0, 0, 0, -22.8486, -0.103771, -24.0797),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="MainScene" type="Node3D" node_paths=PackedStringArray("test_tower_spot")]
 script = ExtResource("1_i62sa")
@@ -222,8 +229,12 @@ transform = Transform3D(1, 0, 0, 0, 0.999998, 0.00190242, 0, -0.00190242, 0.9999
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.127686, 1.32013, -0.688011)
 curve = SubResource("Curve3D_iudv8")
 
-[node name="Payload" parent="Route/Path3D" instance=ExtResource("5_maco2")]
-transform = Transform3D(0.808478, -0.0451794, -0.586788, -1.86264e-09, 0.997048, -0.0767671, 0.588525, 0.0620646, 0.806092, -25.0614, -1.81251, -19.4889)
+[node name="TestPath3D" type="Path3D" parent="Route"]
+curve = SubResource("Curve3D_1xdnc")
+
+[node name="Payload" parent="Route/TestPath3D" instance=ExtResource("5_maco2")]
+unique_name_in_owner = true
+transform = Transform3D(0.840253, -0.0482968, -0.540038, -2.09548e-09, 0.996023, -0.0890766, 0.542194, 0.0748469, 0.836912, -25.308, -0.509437, -20.2683)
 
 [node name="Player" parent="." instance=ExtResource("6_1i8r8")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.410413, 0.536, 1.58252)

@@ -19,7 +19,7 @@ func take_damage(damage : float, _direction : Vector3) -> void:
 	if damage < 0.0:
 		push_error("Tried to deal negative damage")
 		return
-	emit_signal("took_damage")
+	took_damage.emit()
 	
 	health -= damage
 	if health <= 0.0:
