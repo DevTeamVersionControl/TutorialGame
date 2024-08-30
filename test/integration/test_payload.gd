@@ -63,21 +63,21 @@ func test_update_speed_WhenCanNotAdvance_ReducesSpeed() -> void:
 	# Then
 	assert_almost_eq(payload.speed, 0.5, 0.01)
 
-func test_follow_line_WhenGetsToLastPoint_ReloadsLevel() -> void:
+func test_follow_line_WhenGetsToLastPoint_EmitsSignal() -> void:
 	# Given
 	var values = setup_test_scene()
 	var payload : Payload = values["payload"]
-	payload.tree = autofree(double(SceneTree).new())
 	payload.can_advance = true
 	payload.speed = 1.0
 	payload.progress_ratio = 0.95
 	var time = 1.0
+	watch_signals(payload)
 	# When
 	payload.follow_line(time)
 	await wait_frames(1)
 	
 	# Then
-	assert_called(payload.tree, 'reload_current_scene')
+	assert_signal_emitted(payload, 'payload_finished')
 
 func test_update_can_advance_WhenPlayerIsInZone_SetsTrue() -> void:
 	## Given
