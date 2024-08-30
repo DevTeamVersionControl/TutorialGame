@@ -2,14 +2,18 @@ class_name MainScene extends Node3D
 
 @export var test_tower_spot : TowerSpot
 @onready var payload : Payload = %Payload
+@onready var tower_spot_parent = $TowerSpots
 var start_level_time_msec : int
+var level_system : LevelSystem
 var tree
 
 func _ready():
-	if test_tower_spot != null:
-		test_tower_spot.spawn_tower(TowerSpawnRequest.new(50, 2, 10, 5))
+	tree = get_tree() if tree == null else tree
+	level_system = LevelSystemSingleton if level_system == null else level_system
+	level_system.spawn_towers(tower_spot_parent)
+	
 	payload.payload_finished.connect(end_level)
-	tree = get_tree()
+	
 	start_level_time_msec = Time.get_ticks_msec()
 
 func end_level() -> void:
