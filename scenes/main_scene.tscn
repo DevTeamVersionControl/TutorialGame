@@ -234,7 +234,7 @@ curve = SubResource("Curve3D_1xdnc")
 
 [node name="Payload" parent="Route/TestPath3D" instance=ExtResource("5_maco2")]
 unique_name_in_owner = true
-transform = Transform3D(0.840254, -0.0482968, -0.540037, 0, 0.996024, -0.0890768, 0.542192, 0.0748471, 0.836913, -25.308, -0.509437, -20.2683)
+transform = Transform3D(0.840253, -0.0482968, -0.540038, -2.09548e-09, 0.996023, -0.0890766, 0.542194, 0.0748469, 0.836912, -25.308, -0.509437, -20.2683)
 
 [node name="Player" parent="." instance=ExtResource("6_1i8r8")]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, -0.410413, 0.536, 1.58252)
