@@ -8,13 +8,15 @@ var level_system : LevelSystem
 var tree
 
 func _ready():
-	level_system = LevelSystemSingleton
+	level_system = LevelSystemSingleton if level_system == null else level_system
+	tree = get_tree() if tree == null else tree
+	
 	exit_button.pressed.connect(exit_game)
 	next_level_button.pressed.connect(load_next_level)
 	time_label.text = time_convert(GlobalVars.seconds_in_level)
-	level_finished_label.text = "LEVEL " + str(level_system.level) + " FINISHED !"
+	level_finished_label.text = "LEVEL {0} FINISHED !".format([level_system.level])
+	
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	tree = get_tree()
 
 func exit_game() -> void:
 	tree.quit()
