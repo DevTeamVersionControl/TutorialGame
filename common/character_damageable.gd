@@ -24,7 +24,7 @@ func take_damage(damage : float, _direction : Vector3) -> void:
 	if health <= 0.0:
 		die()
 		return
-		
+	
 	took_damage.emit(health)
 	
 	if mesh_instance:
