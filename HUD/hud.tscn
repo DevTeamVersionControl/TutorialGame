@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3in66ay1x8ec"]
+
+[ext_resource type="Script" path="res://HUD/hud.gd" id="1_2jrdk"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_2jrdk")
+
+[node name="Health" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 28.0
+offset_top = 22.0
+offset_right = 211.0
+offset_bottom = 81.0
+
+[node name="ColorRect" type="ColorRect" parent="Health"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HealthDisplay" type="Label" parent="Health"]
+layout_mode = 1
+offset_right = 41.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+text = "Health"
+
+[node name="HealthCount" type="Label" parent="Health"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "10
+"
+
+[node name="Level" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -188.0
+offset_top = 23.0
+offset_right = -34.0
+offset_bottom = 82.0
+grow_horizontal = 0
+
+[node name="ColorRect" type="ColorRect" parent="Level"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LevelDisplay" type="Label" parent="Level"]
+layout_mode = 1
+offset_right = 41.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+text = "Level"
+
+[node name="LevelCount" type="Label" parent="Level"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "10
+"

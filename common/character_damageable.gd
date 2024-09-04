@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name CharacterDamageable
 
-signal took_damage
+signal took_damage(health : float)
 
 var material : StandardMaterial3D
 var mesh_instance : MeshInstance3D
@@ -19,12 +19,13 @@ func take_damage(damage : float, _direction : Vector3) -> void:
 	if damage < 0.0:
 		push_error("Tried to deal negative damage")
 		return
-	took_damage.emit()
 	
 	health -= damage
 	if health <= 0.0:
 		die()
 		return
+	
+	took_damage.emit(health)
 	
 	if mesh_instance:
 		material.albedo_color = Color.RED

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalVars="*res://common/global_vars.gd"
 RessourceMappings="*res://common/ressource_mappings.gd"
+LevelSystemSingleton="*res://common/level_system_singleton.gd"
 
 [debug]
 

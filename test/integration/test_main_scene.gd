@@ -13,7 +13,7 @@ func test_AccuratelyMeasuresTime() -> void:
 	await wait_seconds(1)
 	scene.end_level()
 	# Then
-	assert_almost_eq(GlobalVars.seconds_in_level, 1, 0.2)
+	assert_almost_eq(GlobalVars.seconds_in_level, 1.0, 0.2)
 
 func test_DifferentTimeScale_TimeMeasuredUnaffected() -> void:
 	# Given
@@ -26,5 +26,5 @@ func test_DifferentTimeScale_TimeMeasuredUnaffected() -> void:
 	await wait_seconds(1 * Engine.time_scale) # Turns out this is affected by time scale lol
 	scene.end_level()
 	# Then
-	assert_almost_eq(GlobalVars.seconds_in_level, 1, 0.2)
+	assert_almost_eq(GlobalVars.seconds_in_level, 1.0, 0.2)
 	Engine.time_scale = 1

@@ -8,6 +8,7 @@ func before_all() -> void:
 	add_child(tower)
 	tower_detection_radius = tower.player_detector.collision_shape.shape.radius
 	remove_child(tower)
+	await get_tree().physics_frame
 
 func test_PlayerOutOfRange_DoesNothing() -> void:
 	# Given

@@ -1,5 +1,8 @@
 extends GutTest
 
+func before_each() -> void:
+	await get_tree().physics_frame
+
 func test_initialise_payload_HappyPath_SetsToFirstPoint() -> void:
 	# Given
 	var values = setup_test_scene()
@@ -98,7 +101,8 @@ func test_update_can_advance_WhenPlayerIsNotInZone_SetsFalse() -> void:
 	var player : Player = values["player"]
 	player.global_position = Vector3(10,0,10)
 	# When
-	await wait_frames(2)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	payload.update_can_advance()
 	# Then
 	assert_false(payload.can_advance)
